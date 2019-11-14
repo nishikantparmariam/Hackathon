@@ -17,7 +17,7 @@ We have developed a Webapp for the problem allotted to us. Screenshot with funct
 #### Can upvote a post if they think it is useful/relevant to them or for their peers.
 
 ### Projects
-![alt text](https://github.com/nishikantparmariam/Inter-IIT-Hackathon/blob/master/screenshots/screencapture-file-D-Work-Inter-IIT-home-html-2019-11-15-00_43_14.png)
+![alt text](https://github.com/nishikantparmariam/Inter-IIT-Hackathon/blob/master/screenshots/screencapture-file-D-Work-Inter-IIT-home-html-2019-11-15-00_56_43.png)
 #### Users can put their project information on the platform 
 #### Other users can help or contribute to the project 
 #### There will be an option to put a link to the project as well
