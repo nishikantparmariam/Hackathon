@@ -2,6 +2,10 @@
 
 We have developed a Webapp for the problem allotted to us. The webapp supports the following functionalities :- 
 
+![alt text](https://github.com/nishikantparmariam/Inter-IIT-Hackathon/blob/master/screenshots/screencapture-file-D-Work-Inter-IIT-index-html-2019-11-15-00_31_22.png)
+![alt text](https://github.com/nishikantparmariam/Inter-IIT-Hackathon/blob/master/screenshots/screencapture-file-D-Work-Inter-IIT-home-html-2019-11-15-00_44_35.png)
+![alt text](https://github.com/nishikantparmariam/Inter-IIT-Hackathon/blob/master/screenshots/screencapture-file-D-Work-Inter-IIT-home-html-2019-11-15-00_43_14.png)
+
 ## Functionality
 
 ### Public post 
