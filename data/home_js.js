@@ -66,8 +66,8 @@ function post_submit(){
 
             post_project_link
 
-            if(post_tag=="Project"){
-                toAdd[content]="<a href='"+document.getElementById("post_project_link").value+"'></a><br><br>"+post_content
+            if(post_tag=="Project" && document.getElementById("post_project_link").value!=""){
+                toAdd["content"]="<b>Link to the Project</b><br><a href='"+document.getElementById("post_project_link").value+"'> "+document.getElementById("post_project_link").value+" </a><br><br>"+post_content;
             }
 
             db.collection("posts").add(toAdd)
@@ -139,7 +139,7 @@ function upvote_post(post_id, action){
 }
 
 function give_reply_ui(data){
-    return '<div style="background:#f5f5f5;border-radius:5px;padding:10px;margin-bottom:5px;"><div style="float:left;width:50px;height:50px;border-radius:100%;background:#fff;font-size:20pt;padding-left:15px;padding-top:5px;">'+data.fullname[0]+'</div><div style="float:left;margin-left:20px;"><b>'+data.fullname+'</b><br>'+data.reply+'</div><br><br></div>';
+    return '<div style="background:#f5f5f5;border-radius:5px;padding:10px;margin-bottom:5px;"><div style="float:left;position:absolute;width:50px;height:50px;border-radius:100%;background:#fff;font-size:20pt;padding-left:15px;padding-top:5px;">'+data.fullname[0]+'</div><div style="margin-left:65px;"><b>'+data.fullname+'</b><br>'+data.reply+'</div></div>';
 }
 
 function load_replies(post_id){    
@@ -211,9 +211,11 @@ function buildpost(data, post_id){
     } else if(data.tag=="New Idea"){
         color = "7E359F";
 
-    } else {
+    } else if(data.tag=="General Query") {
         color = "DD0000";
 
+    } else {
+        color = "E89A1E";
     }
     if(!data["upvotes"].includes(firebaseUser.uid)){
         return '<br><div class="card"><div class="card-body"><div style="float:left;width:50px;height:50px;border-radius:100%;background:#eee;font-size:20pt;padding-left:15px;padding-top:5px;">'+data.name[0]+'</div><div style="float:left;margin-left:20px;"><b>'+data.name+'</b><br>'+data.email+'</div><div style="float:right;border-radius:15px;padding:5px 15px;background:#'+color+';color:#fff;">'+data.tag+'</div><br><br><hr>'+data.content+'<br><br><div style="text-align:right;">'+data.timestamp+'</div><hr><div style="text-align:left;float:left;"> <button onclick="upvote_post(\''+post_id+'\', 1);" class="btn btn-default btn-sm"><i class="fa fa-arrow-up"></i> Upvote  </button>&nbsp;&nbsp;<button onclick="load_replies(\''+post_id+'\');" type="button" data-toggle="collapse" data-target="#collapseExample'+post_id+'" aria-expanded="false" aria-controls="collapseExample"  class="btn btn-default btn-sm"><i class="fa fa-share"></i> Reply  </button></div><div style="text-align:right;"> <b>'+data.upvotes.length+' </b> Upvotes</div><div class="collapse" id="collapseExample'+post_id+'"><hr><div id="replies_shower'+post_id+'"></div> <div><input type="text" style="float:left;width:80%;" class="form-control" id="replier'+post_id+'" placeholder="Write a reply..."><button id="all-reply-btns" class="btn btn-default all-reply-btns" style="float:right;width:20%;color:#28A745;" onclick="send_reply(\''+post_id+'\')"><i class="fa fa-send"></i> Send</button><br> <input type="checkbox" id="send_anonoymous'+post_id+'" name="post_anonymous" value="1">   Send Anonymously</div></div></div></div>';       
@@ -235,7 +237,9 @@ function fetch_posts(category){
         exp3 = "New Idea";
     } else if(category==5){
         exp3 = "General Query";
-    } 
+    } else if(category==6){
+        exp3 = "Project";
+    }
     
         db.collection("posts").orderBy("timestamp2", "desc")
         .onSnapshot(function(querySnapshot) {     
