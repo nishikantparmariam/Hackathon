@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home - Welcome</title> 
+    <script>
+        var file_code = "b";
+        var user_id = null;
+        var firebaseUser = null;
+        var firebaseUserData = null;
+    </script>       
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase-database.js"></script>  
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-firestore.js"></script>      
+    <script src="data/firebase_js.js"></script>
+    <script src="data/home_js.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f5f5f5;
+        }
+        #askFordisplayName  {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            padding-top: 100px; 
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.8);
+            width: 100%; 
+            height: 100%;
+            overflow: auto;
+            left: 0;
+            top: 0;
+            
+        }
+        #askFordisplayNameinside 
+        {
+            background-color:#ffffff;
+            border-radius:5px;
+            box-shadow:0px 1px 2px rgba(0,0,0,0.5);
+            z-index:2 !important;
+            position:fixed;
+            width:30%;
+            margin-left:35%;
+            margin-top:0px;
+            display:;
+        }
+        @media screen and (max-width:900px) {
+            #askFordisplayNameinside 
+            {
+                width:85%;
+                margin-left:7.5%;
+                margin-right:7.5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">            
+            <div class="col-md-12">
+                <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&-->                                
+                
+                <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark" style="border-radius:10px;">                                        
+                    <a class="navbar-brand" href="#">GuidHub</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>                                                
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="post();">My Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="#" onclick="userSignOut();">Sign Out</a>
+                        </li>
+                        <!--<li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>  -->                      
+                        </ul>
+                        <!--<form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search for other users..." aria-label="Search for other users...">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>-->
+                    </div>
+                </nav>
+                <br>
+                <div class="row">                                        
+                    <div class="col-md-5">
+                        
+                        <div class="card">
+                            <div class="card-body">                                
+                                <textarea class="form-control" id="post_content" onkeyup="count();" maxlength="500" style="height: 100px;" placeholder="Write new post..."></textarea>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                            Tag :
+                                            <select id="post_tag">
+                                                <option value="General">General</option>    
+                                                <option value="Academic Doubt">Academic Doubt</option>
+                                                <option value="Problem">Problem</option>
+                                                <option value="New Idea">New Idea</option>
+                                                <option value="General Query">General Query</option>                                                
+                                            </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                            <input type="checkbox" id="post_anonymous" name="post_anonymous" value="1"> <label for="post_anonymous">Keep it anonymous</label> 
+                                    </div>
+                                </div>                                                                
+                                <br>      
+                                <button class="btn btn-primary" onclick="post_submit();">Post</button>   
+                                <div style="float: right;" id="post_length">0/500</div>                       
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">        
+                        <h5>All Posts</h5>                 
+                        <div id="post_display_load"></div> 
+                        <div id="post_display"></div>                      
+                    </div>
+                </div>                                
+                <!--&&&&&&&&&&&&&&&&&&&&&&&&&&&-->
+            </div>            
+        </div>
+    </div>    
+    <div id="askFordisplayName">
+        <div id="askFordisplayNameinside">
+            <div style="margin:15px;z-index:99;">
+                Please complete these : 
+                <br><br>
+                <input type="text" class="form-control" placeholder="Full Name" id="displaynameask" maxlength="50"><br>
+                <input type="text" class="form-control" placeholder="Batch" id="batchask" maxlength="50"><br>
+                <button class="btn btn-primary" onclick="setUserInfo()">OK &raquo;</button>
+                <div id="err_show_display_name" style="float:right;margin-top:-25px;"></div>
+            </div>
+        </div>
+    </div>  
+    <br><br>      
+</body>
+</html>
