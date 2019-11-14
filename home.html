@@ -28,6 +28,12 @@
             font-family: 'Montserrat', sans-serif;
             background: #f5f5f5;
         }
+        .cat_a {
+            cursor: pointer;
+        }
+        #project_input {
+            display: none;
+        }
         #askFordisplayName  {
             display: none;
             position: fixed;
@@ -116,18 +122,23 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                             Tag :
-                                            <select id="post_tag">
+                                            <select id="post_tag" onchange="check_();">
                                                 <option value="General">General</option>    
                                                 <option value="Academic Doubt">Academic Doubt</option>
                                                 <option value="Problem">Problem</option>
                                                 <option value="New Idea">New Idea</option>
-                                                <option value="General Query">General Query</option>                                                
+                                                <option value="General Query">General Query</option>     
+                                                <option value="Project">Project</option>                                                
                                             </select>
                                     </div>
                                     <div class="col-md-6">
                                             <input type="checkbox" id="post_anonymous" name="post_anonymous" value="1"> <label for="post_anonymous">Keep it anonymous</label> 
                                     </div>
-                                </div>                                                                
+                                </div>              
+                                <div id="project_input">
+                                    <br>                                    
+                                    <input type="text" class="form-control" id="post_project_link" placeholder="Link to the project">
+                                </div>                                                  
                                 <br>      
                                 <button class="btn btn-primary" onclick="post_submit();">Post</button>   
                                 <div style="float: right;" id="post_length">0/500</div>                       
@@ -135,8 +146,14 @@
                         </div>
                     </div>
                     <div class="col-md-7">        
-                        <h5>All Posts</h5>                 
-                        <div id="post_display_load"></div> 
+                        <h5>Posts</h5>                 
+                        <a onclick="fetch_posts(0);" class="cat_a" style="font-size:10pt;border-radius:15px;padding:5px 15px;background:#e9ebec;color:#000;text-decoration:none;">All</a>
+                        <a onclick="fetch_posts(1);" class="cat_a" style="font-size:10pt;border-radius:15px;padding:5px 15px;background:#46019B;color:#fff;text-decoration:none;">General</a>
+                        <a onclick="fetch_posts(2);" class="cat_a"  style="font-size:10pt;border-radius:15px;padding:5px 15px;background:#007EFE;color:#fff;text-decoration:none;">Academic Doubt</a>
+                        <a onclick="fetch_posts(3);" class="cat_a" style="font-size:10pt;border-radius:15px;padding:5px 15px;background:#00BB00;color:#fff;text-decoration:none;">Problem</a>
+                        <a onclick="fetch_posts(4);" class="cat_a" style="font-size:10pt;border-radius:15px;padding:5px 15px;background:#7E359F;color:#fff;text-decoration:none;">New Idea</a>
+                        <a onclick="fetch_posts(5);" class="cat_a" style="font-size:10pt;border-radius:15px;padding:5px 15px;background:#DD0000;color:#fff;text-decoration:none;">General Query</a>
+                        <div id="post_display_load"></div>                         
                         <div id="post_display"></div>                      
                     </div>
                 </div>                                

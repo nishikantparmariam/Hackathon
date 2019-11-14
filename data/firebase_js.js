@@ -22,7 +22,7 @@ var firebaseConfig = {
         if (doc.exists) {
             firebaseUserData = doc.data();   
             console.log(firebaseUserData); 
-            fetch_posts();        
+            fetch_posts(0);        
         } else {              
             document.getElementById('askFordisplayName').style.cssText="display:block !important;";         
         }
