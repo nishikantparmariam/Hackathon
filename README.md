@@ -1,5 +1,7 @@
 # IITGN Discussion Platform
 
+Link - https://iitgn-discussion-platform.netlify.com/
+
 We have developed a webapp for the problem allotted to us. Screeshots showing various functionalities
 
 ### Login/Sign Up Page
